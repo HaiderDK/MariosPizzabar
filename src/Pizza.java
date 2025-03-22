@@ -2,7 +2,7 @@ public class Pizza {
         private int price;
         private String description;
 
-        private static final Pizza[] pizzas = {
+        public static final Pizza[] pizzas = {
                 new Pizza(" Vesuvio: tomatsauce, ost, skinke og oregano", 65),
                 new Pizza(" Amerkaner: tomatsauce, ost, oksefars og oregano", 65),
                 new Pizza(" Cacciatore: tomatsauce, ost, pepperoni og oregano", 85),
@@ -48,15 +48,7 @@ public class Pizza {
             System.out.println((i + 1) + ". " + pizzas[i]);
         }
     }
-    public Pizza selectPizza(int choice) {
-        if (choice >= 1 && choice <= pizzas.length) {
-            return pizzas[choice - 1];
-        } else {
-            System.out.println("Ugyldigt valg. Prøv igen.");
 
-        }
-        return null;
-    }
 
 
     // Konstruktor her tager ikke nogle argumenter, men istedet læser den vores inpput
