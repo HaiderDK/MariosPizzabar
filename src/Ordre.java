@@ -6,8 +6,9 @@ import java.util.Random;
 import java.util.Scanner;
 
     public class Ordre {
-        static Random random;
-        private static Map<Pizza, Integer> pizzaOrdre;  // Holder styr på pizzaer og deres antal
+        static Random random = new Random();
+        static Scanner scanner = new Scanner(System.in);
+        private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>();  // Holder styr på pizzaer og deres antal
 
 
         // Konstruktør
@@ -30,6 +31,23 @@ import java.util.Scanner;
             }
         }
 
+        //Her får vi kundens navn og nummer hvis vi
+        // har behov for for at kunne få kontakt til dem
+        public static String getCustomersInfo(){
+
+            System.out.println("Name.... ");
+            String name = scanner.nextLine();
+
+
+            System.out.println("Phone number.... ");
+            String number = scanner.nextLine();
+            scanner.nextLine();
+
+            return "Name: " + name + "\nPhone number: +45 " + number;
+
+
+        }
+
             public static void finalizeOrder() {
 
                 // Generer et tilfældigt ordre-ID (5-cifret nummer)
@@ -45,6 +63,7 @@ import java.util.Scanner;
                 // Formatér tidspunkt
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
+                getCustomersInfo();
                 System.out.println("\n Ordrebekræftelse 🍕 ");
                 System.out.println("Ordre ID: " + orderId);
                 System.out.println("Bestillingstidspunkt: " + orderTime.format(formatter));
@@ -53,6 +72,8 @@ import java.util.Scanner;
                 for (Map.Entry<Pizza, Integer> entry : pizzaOrdre.entrySet()) {
                     System.out.println("- " + entry.getKey().getDescription() + " x" + entry.getValue());
                 }
+
+
                 System.out.println("Tak for din bestilling! 🍕");
             }
         public static void addPizzaToOrder(Pizza pizza, int quantity) {

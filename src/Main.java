@@ -27,27 +27,37 @@ public class Main {
                         System.out.println("Du har valgt: " + selectedPizza.getDescription());
 
                         System.out.print("Hvor mange vil du bestille? ");
-                        int quantity = scanner.nextInt();
+                        if (scanner.hasNextInt()) {
+                            int quantity = scanner.nextInt();
+                            scanner.nextLine();
 
-                        // Tilføj pizzaen til ordren
-                        Ordre.addPizzaToOrder(selectedPizza, quantity);
 
-                        // Spørg om brugeren vil bestille flere pizzaer
-                        System.out.print("Vil du bestille flere pizzaer? (Ja/Nej): ");
-                        String response = scanner.next();
-                        if (response.equalsIgnoreCase("Nej")) {
-                            ordering = false;  // Stop bestilling
+                            // Tilføj pizzaen til ordren
+                            Ordre.addPizzaToOrder(selectedPizza, quantity);
+
+                            // Spørg om brugeren vil bestille flere pizzaer
+                            System.out.print("Vil du bestille flere pizzaer? (Ja/Nej): ");
+                            String response = scanner.nextLine();  // Brug nextLine() til at læse hele svaret
+
+                            if (response.equalsIgnoreCase("Nej")) {
+                                ordering = false;  // Stop bestilling
+                            }
+                        } else {
+                            System.out.println("Ugyldigt antal. Prøv igen.");
+                            scanner.nextLine();  // Ryd buffer, hvis input ikke er et tal
                         }
                     } else {
                         System.out.println("Ugyldigt valg. Prøv igen.");
                     }
+                } else {
+                    System.out.println("Indtast venligst et tal.");
+                    scanner.nextLine();  // Ryd buffer for ugyldigt input
                 }
-
-
             }
-            Ordre.finalizeOrder();
-            scanner.close();
         }
+
+        Ordre.finalizeOrder();
+        scanner.close();
     }
 }
 
