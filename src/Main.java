@@ -6,6 +6,11 @@ public class Main {
         Pizza pizza = new Pizza();
         boolean ordering = true;
 
+        //******** MANGLER AT TILFØJE KODEN TIL MENUEN **********
+        Menu menu = new Menu(); //Create Menu object
+        menu.pizzaMenu(scanner); //Calls the pizzaMenu method inside Menu class
+        //scanner.close(); //idk finder ud af det...
+
         // Vis menuen
         pizza.showMenu();
 
