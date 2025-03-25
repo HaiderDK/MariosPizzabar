@@ -10,7 +10,10 @@ import java.util.Scanner;
         static Scanner scanner = new Scanner(System.in);
         private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>();// Holder styr på pizzaer og deres antal
         private LocalDateTime orderTime;
+        private int ordreId;
         static boolean ordering = true;
+
+
 
         // Konstruktør
         public Ordre() {
@@ -18,8 +21,18 @@ import java.util.Scanner;
             this.orderTime = LocalDateTime.now();
         }
 
+        public int getOrdreId() {
+            return ordreId;
+        }
+
+
         public LocalDateTime getOrderTime(){
             return orderTime;
+        }
+
+        public static void addPizzaToOrder(Pizza pizza, int quantity) {
+            pizzaOrdre.put(pizza, pizzaOrdre.getOrDefault(pizza, 0) + quantity);
+
         }
 
         public static void showMenu() {
@@ -81,12 +94,18 @@ import java.util.Scanner;
 
 
                 System.out.println("Tak for din bestilling! 🍕");
+
             }
-        public static void addPizzaToOrder(Pizza pizza, int quantity) {
-            pizzaOrdre.put(pizza, pizzaOrdre.getOrDefault(pizza, 0) + quantity);
+
+        @Override
+        public String toString() {
+            return "Ordre #" + ordreId + " - Bestilt: " + orderTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
 
+
         public static void bestilling(){
+
+            boolean ordering = true;
 
             Ordre ordre = new Ordre(); // Ny ordre hver gang
 
@@ -147,6 +166,7 @@ import java.util.Scanner;
                     ordering = false;  // Stop bestilling
                 }
             }
+            ordre.finalizeOrder();
         }
 
     }
