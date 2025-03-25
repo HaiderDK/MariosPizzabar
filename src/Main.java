@@ -4,26 +4,36 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Pizza pizza = new Pizza();
+
         OrdreList ordreList = new OrdreList();
-        boolean ordering = true;
+        // Opret en instans af Ordre
+        Ordre ordre = new Ordre();
+
+
 
         //******** MANGLER AT TILFØJE KODEN TIL MENUEN **********
         Menu menu = new Menu(); //Create Menu object
         menu.pizzaMenu(scanner); //Calls the pizzaMenu method inside Menu class
         //scanner.close(); //idk finder ud af det...
 
-        // Loop for at tillade flere bestillinger
-        while (ordering) {
-            // Opretter en ny ordre
-            Ordre ordre = new Ordre(); // Ny ordre hver gang
+
+
+
 
             //Tag ordre
             Ordre.showMenu();
+            Ordre nyOrdre = Ordre.bestilling();
             Ordre.bestilling();
 
-            Ordre.finalizeOrder();
+            //Afslutte ordre
+            ordre.finalizeOrder();
+
+            //Administrer ordrer
+            ordreList.displayOrdrer();
+            ordreList.addOrdre(ordre);
+            ordreList.removeOrdre(nyOrdre.getOrderId());
+
 
             scanner.close();
         }
     }
-}

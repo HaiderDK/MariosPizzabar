@@ -5,43 +5,33 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-    public class Ordre {
-        static Random random = new Random();
-        static Scanner scanner = new Scanner(System.in);
-        private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>();// Holder styr på pizzaer og deres antal
-        private LocalDateTime orderTime;
-        private int ordreId;
-        static boolean ordering = true;
+public class Ordre {
+    static Random random = new Random();
+    static Scanner scanner = new Scanner(System.in);
+    private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>(); // Holder styr på pizzaer og deres antal
+    private LocalDateTime orderTime;
+    private int ordreId;  // Instansvariabel for ordreId
+    static boolean ordering = true;
+
+    // Konstruktør
+    public Ordre() {
+        this.ordreId = 1000 + random.nextInt(90000);  // Tildeler et unikt ordreID
+        pizzaOrdre = new HashMap<>();  // Initialiser pizzaOrdre som en HashMap
+        this.orderTime = LocalDateTime.now();  // Tildeler bestillingstidspunktet
+    }
+
+    // getOrderId() skal ikke være statisk, da det refererer til instansvariablen ordreId
+    public int getOrderId() {
+        return this.ordreId;  // Returner instansvariablen ordreId
+    }
+
+    public LocalDateTime getOrderTime() {
+        return orderTime;  // Returner bestillingstidspunktet
+    }
 
 
 
-        // Konstruktør
-        public Ordre() {
-            pizzaOrdre = new HashMap<>();  // Initialiser pizzaOrdre som en HashMap
-            this.orderTime = LocalDateTime.now();
-        }
-
-        public int getOrdreId() {
-            return ordreId;
-        }
-
-
-        public LocalDateTime getOrderTime(){
-            return orderTime;
-        }
-
-        public static void addPizzaToOrder(Pizza pizza, int quantity) {
-            pizzaOrdre.put(pizza, pizzaOrdre.getOrDefault(pizza, 0) + quantity);
-
-        }
-
-        public static void showMenu() {
-            System.out.println("🍕 Pizzaria Menu 🍕");
-            for (int i = 0; i < Pizza.pizzas.length; i++) {
-                System.out.println((i + 1) + ". " + Pizza.pizzas[i]);
-            }
-        }
-
+        // Metode til at få pizza baseret på valg
         public static Pizza getPizza(int choice) {
             if (choice >= 1 && choice <= Pizza.pizzas.length) {
                 return Pizza.pizzas[choice - 1]; // Returnerer den valgte pizza (brugeren vælger fra 1, men array starter ved 0)
@@ -50,72 +40,72 @@ import java.util.Scanner;
             }
         }
 
-        //Her får vi kundens navn og nummer hvis vi
-        // har behov for for at kunne få kontakt til dem
-        public static String CustomersInfo(){
 
+
+        // Metode til at tilføje pizza til ordren
+        public static void addPizzaToOrder(Pizza pizza, int quantity) {
+            pizzaOrdre.put(pizza, pizzaOrdre.getOrDefault(pizza, 0) + quantity);
+        }
+
+        // Metode til at vise menuen
+        public static void showMenu() {
+            System.out.println("🍕 Pizzaria Menu 🍕");
+            for (int i = 0; i < Pizza.pizzas.length; i++) {
+                System.out.println((i + 1) + ". " + Pizza.pizzas[i]);
+            }
+        }
+
+        // Metode til at hente kundens info
+        public static String CustomersInfo() {
             System.out.println("Navn: ");
             String name = scanner.nextLine();
-
 
             System.out.println("Telefon nummer:");
             String number = scanner.nextLine();
             scanner.nextLine();
 
             return "\nName: " + name + "\nTelefon nummer: +45" + number;
+        }
+
+
+        // Afslut ordre og print ordrebekræftelse
+        public void finalizeOrder() {
+
+            // Registrer tid og forventet færdig tid
+            LocalDateTime orderTime = LocalDateTime.now();
+            LocalDateTime readyTime = orderTime.plusMinutes(15);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+            System.out.println("\n Ordrebekræftelse 🍕 ");
+            System.out.println("Ordre ID: " + ordreId);
+            System.out.println("kundeoplysninger: " + CustomersInfo());
+            System.out.println("Bestillingstidspunkt: " + orderTime.format(formatter));
+            System.out.println("Forventet færdig: " + readyTime.format(formatter));
+            System.out.println("Bestilling:");
+
+            // Udskriv ordren
+            for (Map.Entry<Pizza, Integer> entry : pizzaOrdre.entrySet()) {
+                System.out.println("- " + entry.getKey().getDescription() + " x" + entry.getValue());
+            }
+
+            System.out.println("Tak for din bestilling! 🍕");
 
 
         }
-
-            public static void finalizeOrder() {
-
-                // Generer et tilfældigt ordre-ID (5-cifret nummer)
-
-                int orderId = 10000 + random.nextInt(90000);
-
-                //
-                String customerInfomation = CustomersInfo();
-
-                // Registrer den aktuelle tid
-                LocalDateTime orderTime = LocalDateTime.now();
-
-                // Beregn færdiggørelsestid (15 min senere)
-                LocalDateTime readyTime = orderTime.plusMinutes(15);
-
-                // Formatér tidspunkt
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-
-                System.out.println("\n Ordrebekræftelse 🍕 ");
-                System.out.println("Ordre ID: " + orderId);
-                System.out.println("kundeoplysninger: " + customerInfomation);
-                System.out.println("Bestillingstidspunkt: " + orderTime.format(formatter));
-                System.out.println("Forventet færdig: " + readyTime.format(formatter));
-                System.out.println("Bestilling:");
-                for (Map.Entry<Pizza, Integer> entry : pizzaOrdre.entrySet()) {
-                    System.out.println("- " + entry.getKey().getDescription() + " x" + entry.getValue());
-                }
-
-
-                System.out.println("Tak for din bestilling! 🍕");
-
-            }
 
         @Override
         public String toString() {
             return "Ordre #" + ordreId + " - Bestilt: " + orderTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
 
-
-        public static void bestilling(){
-
+        // Bestilling af pizza
+        public static Ordre bestilling() {
             boolean ordering = true;
-
-            Ordre ordre = new Ordre(); // Ny ordre hver gang
+            Ordre ordre = new Ordre();  // Ny ordre hver gang
 
             while (ordering) {
                 Pizza selectedPizza = null;
-
 
                 // Bliv ved med at spørge, indtil brugeren vælger en gyldig pizza
                 while (selectedPizza == null) {
@@ -144,12 +134,9 @@ import java.util.Scanner;
                     if (scanner.hasNextInt()) {
                         quantity = scanner.nextInt();
                         scanner.nextLine(); // Ryd buffer
-                        if (quantity <= 0) {
-                            System.out.println("Antallet skal være større end 0. Prøv igen.");
-                        }
                     } else {
-                        System.out.println("Ugyldigt antal. Indtast et heltal.");
-                        scanner.nextLine(); // Ryd buffer
+                        System.out.println("Indtast venligst et gyldigt antal."); // Fejlmeddelelse for ikke-tal input
+                        scanner.nextLine(); // Ryd buffer for ugyldigt input
                     }
                 }
 
@@ -171,8 +158,12 @@ import java.util.Scanner;
                 }
             }
             ordre.finalizeOrder();
+            return ordre; // Kalder finalizeOrder på den aktuelle ordre
         }
 
     }
+
+
+
 
 
