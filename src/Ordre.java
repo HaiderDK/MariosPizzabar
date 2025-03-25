@@ -79,6 +79,31 @@ import java.util.Scanner;
         public static void addPizzaToOrder(Pizza pizza, int quantity) {
             pizzaOrdre.put(pizza, pizzaOrdre.getOrDefault(pizza, 0) + quantity);
         }
+        private int ordreId;
+        private String customerName;
+        private LocalDateTime ordreTime;
 
+        public Ordre(int ordreId, String customerName) {
+            this.ordreId = ordreId;
+            this.customerName = customerName;
+            this.ordreTime = LocalDateTime.now(); // localdatetime gør sådan bestillingstidspunktet automatisk gemmes
+        }
+
+        public int getOrdreId() {
+            return ordreId;
+        }
+
+        public String getCustomerName() {
+            return customerName;
+        }
+
+        public LocalDateTime getOrdreTime() {
+            return ordreTime;
+        }
+
+        @Override
+        public String toString() {
+            return "Ordre #" + ordreId + " - " + customerName + " - " + ordreTime;
+        }
     }
 

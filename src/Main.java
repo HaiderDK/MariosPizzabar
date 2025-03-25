@@ -58,6 +58,20 @@ public class Main {
 
         Ordre.finalizeOrder();
         scanner.close();
+
+        //  at oprette en liste til ny ordre
+        OrdreList ordreList = new OrdreList();
+
+        // her bliver ordre oprettet
+        OrdreList.Ordre ordre1 = new OrdreList.Ordre(101, "egon olsen");
+        OrdreList.Ordre ordre2 = new OrdreList.Ordre(102, "mo basel");
+
+        //her bliver ordre tilføjet til listen
+        ordreList.addOrdre(ordre1);
+        ordreList.addOrdre(ordre2);
+
+        // Viser ordrerne (Skal ikke være rød længere!)
+        ordreList.displayOrdrer();
     }
 }
 
