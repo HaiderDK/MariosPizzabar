@@ -54,15 +54,15 @@ import java.util.Scanner;
         // har behov for for at kunne få kontakt til dem
         public static String CustomersInfo(){
 
-            System.out.println("Name.... ");
+            System.out.println("Navn: ");
             String name = scanner.nextLine();
 
 
-            System.out.println("Phone number.... ");
+            System.out.println("Telefon nummer:");
             String number = scanner.nextLine();
             scanner.nextLine();
 
-            return "Name: " + name + "\nPhone number: +45 " + number;
+            return "\nName: " + name + "\nTelefon nummer: +45" + number;
 
 
         }
@@ -73,6 +73,9 @@ import java.util.Scanner;
 
                 int orderId = 10000 + random.nextInt(90000);
 
+                //
+                String customerInfomation = CustomersInfo();
+
                 // Registrer den aktuelle tid
                 LocalDateTime orderTime = LocalDateTime.now();
 
@@ -82,12 +85,13 @@ import java.util.Scanner;
                 // Formatér tidspunkt
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-                CustomersInfo();
+
                 System.out.println("\n Ordrebekræftelse 🍕 ");
                 System.out.println("Ordre ID: " + orderId);
+                System.out.println("kundeoplysninger: " + customerInfomation);
                 System.out.println("Bestillingstidspunkt: " + orderTime.format(formatter));
                 System.out.println("Forventet færdig: " + readyTime.format(formatter));
-                System.out.println("Indhold:");
+                System.out.println("Bestilling:");
                 for (Map.Entry<Pizza, Integer> entry : pizzaOrdre.entrySet()) {
                     System.out.println("- " + entry.getKey().getDescription() + " x" + entry.getValue());
                 }

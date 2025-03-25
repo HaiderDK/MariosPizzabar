@@ -17,9 +17,6 @@ public class Main {
             // Opretter en ny ordre
             Ordre ordre = new Ordre(); // Ny ordre hver gang
 
-            // Vis menuen
-            pizza.showMenu();
-
             //Tag ordre
             Ordre.showMenu();
             Ordre.bestilling();
@@ -30,7 +27,3 @@ public class Main {
         }
     }
 }
-
-
-
-
