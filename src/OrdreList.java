@@ -21,13 +21,13 @@ import java.time.LocalDateTime;
 
         // Fjerner en ordre
         public void removeOrdre(int ordreId) {
-            activeOrders.removeIf(ordre -> ordre.getOrdreId() == ordreId);
+            activeOrders.removeIf(ordre -> ordre.getOrderId() == ordreId);
             System.out.println("Ordre #" + ordreId + " er fjernet.");
         }
 
         // ordre sorteres efter bestillingstid
         public void sortOrdrerByTime() {
-            Collections.sort(activeOrders, Comparator.comparing(Ordre::getOrdreTime));
+            Collections.sort(activeOrders, Comparator.comparing(Ordre::getOrderTime));
         }
 
         // her vises alle de aktive order der er
