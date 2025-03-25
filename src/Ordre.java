@@ -8,12 +8,17 @@ import java.util.Scanner;
     public class Ordre {
         static Random random = new Random();
         static Scanner scanner = new Scanner(System.in);
-        private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>();  // Holder styr på pizzaer og deres antal
-
+        private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>();// Holder styr på pizzaer og deres antal
+        private LocalDateTime orderTime;
 
         // Konstruktør
         public Ordre() {
             pizzaOrdre = new HashMap<>();  // Initialiser pizzaOrdre som en HashMap
+            this.orderTime = LocalDateTime.now();
+        }
+
+        public LocalDateTime getOrderTime(){
+            return orderTime;
         }
 
         public static void showMenu() {
@@ -33,7 +38,7 @@ import java.util.Scanner;
 
         //Her får vi kundens navn og nummer hvis vi
         // har behov for for at kunne få kontakt til dem
-        public static String getCustomersInfo(){
+        public static String CustomersInfo(){
 
             System.out.println("Name.... ");
             String name = scanner.nextLine();
@@ -63,7 +68,7 @@ import java.util.Scanner;
                 // Formatér tidspunkt
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-                getCustomersInfo();
+                CustomersInfo();
                 System.out.println("\n Ordrebekræftelse 🍕 ");
                 System.out.println("Ordre ID: " + orderId);
                 System.out.println("Bestillingstidspunkt: " + orderTime.format(formatter));
