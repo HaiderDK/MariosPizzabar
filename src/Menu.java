@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void pizzaMenu (Scanner scanner) {
+    /*public void pizzaMenu (Scanner scanner) {
 
         //Loop until return is called (Afslut/Exit)
         while (true) {
@@ -53,5 +53,5 @@ public class Menu {
                 System.out.println("\n⚠ Fejl: Indtast et gyldigt tal mellem 1 og 7.");
             }
         }
-    }
+    }*/
 }

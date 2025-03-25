@@ -8,8 +8,8 @@ public class Main {
         boolean ordering = true;
 
         //******** MANGLER AT TILFØJE KODEN TIL MENUEN **********
-        Menu menu = new Menu(); //Create Menu object
-        menu.pizzaMenu(scanner); //Calls the pizzaMenu method inside Menu class
+       // Menu menu = new Menu(); //Create Menu object
+       // menu.pizzaMenu(scanner); //Calls the pizzaMenu method inside Menu class
         //scanner.close(); //idk finder ud af det...
 
         // Loop for at tillade flere bestillinger
