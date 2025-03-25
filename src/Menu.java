@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Menu {
 
+    Pizza pizza = new Pizza();
+
     public void pizzaMenu (Scanner scanner) {
 
         //Loop until return is called (Afslut/Exit)
@@ -27,6 +29,7 @@ public class Menu {
                         System.out.println("\n━━━━━━━━━━━━━━━━━━━━━");
                         System.out.println("📜 MENUKORT");
                         System.out.println("━━━━━━━━━━━━━━━━━━━━━");
+                        pizza.showMenu();
                         break;
                     case 2:
                         System.out.println("\n✅ Opretter en ny ordre...");
