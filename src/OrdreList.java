@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,14 +20,10 @@ import java.time.LocalDateTime;
         }
 
         // Fjerner en ordre
-            public void removeOrdre(int ordreId) {
-                boolean removed = activeOrders.removeIf(ordre -> ordre.getOrdreId() == ordreId);
-                if (removed) {
-                    System.out.println("Ordre #" + ordreId + " er fjernet.");
-                } else {
-                    System.out.println("Ingen ordre med ID #" + ordreId + " fundet.");
-                }
-            }
+        public void removeOrdre(int ordreId) {
+            activeOrders.removeIf(ordre -> ordre.getOrdreId() == ordreId);
+            System.out.println("Ordre #" + ordreId + " er fjernet.");
+        }
 
         // ordre sorteres efter bestillingstid
         public void sortOrdrerByTime() {
@@ -41,6 +38,4 @@ import java.time.LocalDateTime;
             }
         }
     }
-
-
 
