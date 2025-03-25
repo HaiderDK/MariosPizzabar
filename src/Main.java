@@ -6,6 +6,9 @@ public class Main {
         Pizza pizza = new Pizza();
         OrdreList ordreList = new OrdreList();
         boolean ordering = true;
+        ordreList.displayOrdrer();
+        ordreList.removeOrdre();
+        ordreList.addOrdre();
 
         //******** MANGLER AT TILFØJE KODEN TIL MENUEN **********
         Menu menu = new Menu(); //Create Menu object
