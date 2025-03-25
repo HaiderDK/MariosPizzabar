@@ -20,7 +20,7 @@ public class Main {
             // Vis menuen
             pizza.showMenu();
 
-
+            //Tag ordre
             Ordre.showMenu();
             Ordre.bestilling();
 
