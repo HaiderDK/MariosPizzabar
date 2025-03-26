@@ -3,37 +3,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Pizza pizza = new Pizza();
-
+        CompletedOrdre completedOrdre = new CompletedOrdre();
         OrdreList ordreList = new OrdreList();
-        // Opret en instans af Ordre
-        Ordre ordre = new Ordre();
 
+        // Opret en instans af Menu og vis pizza-menuen
+        Menu menu = new Menu();
+        menu.pizzaMenu(scanner);
 
+        // Tag ordre
+        Ordre nyOrdre = Ordre.bestilling();
+        ordreList.addOrdre(nyOrdre);  // Tilføjer ordren til aktiv liste
 
-        //******** MANGLER AT TILFØJE KODEN TIL MENUEN **********
-        Menu menu = new Menu(); //Create Menu object
-        menu.pizzaMenu(scanner); //Calls the pizzaMenu method inside Menu class
-        //scanner.close(); //idk finder ud af det...
+        // Administrer ordrer
+        ordreList.displayOrdrer();  // Viser alle aktive ordrer
 
+        // Afslut ordre (flytter den fra aktiv til færdig liste)
+        ordreList.removeOrdre(nyOrdre.getOrderId());
+        completedOrdre.handleUserInteraction();  // Håndterer færdige ordrer
 
+        // Tilbage til menuen
+        ordreList.ReturnToMenu();
 
-
-
-            //Tag ordre
-            Ordre.showMenu();
-            Ordre nyOrdre = Ordre.bestilling();
-            Ordre.bestilling();
-
-            //Afslutte ordre
-            ordre.finalizeOrder();
-
-            //Administrer ordrer
-            ordreList.displayOrdrer();
-            ordreList.addOrdre(ordre);
-            ordreList.removeOrdre(nyOrdre.getOrderId());
-
-
-            scanner.close();
-        }
+                scanner.close();
+            }
     }
