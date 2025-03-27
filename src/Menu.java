@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class Menu {
 
     Pizza pizza = new Pizza();
-    private OrdreList ordreList;
-    CompletedOrdre completedOrdre = new CompletedOrdre();
+    private OrderList orderList;
 
-    public Menu(OrdreList ordreList) {
-        this.ordreList = ordreList;
+    public Menu(OrderList orderList) {
+        this.orderList = orderList;
     }
 
 
+    //The whole menu system
     public void pizzaMenu (Scanner scanner) {
 
         //Loop until return is called (Afslut/Exit)
@@ -41,36 +41,35 @@ public class Menu {
                         break;
                     case 2:
                         System.out.println("\n✅ Opretter en ny ordre...");
-                        Ordre nyOrdre = Ordre.createOrder(scanner);
-                        ordreList.addOrdre(nyOrdre);
+                        Order nyOrder = Order.createOrder(scanner);
+                        orderList.addOrder(nyOrder);
                         returnToMenu(scanner);
                         break;
                     case 3:
                         System.out.println("\n❌ Afslutter aktive ordrer...");
+                        orderList.displayOrders();
 
                         System.out.print("Indtast ID på ordren, der skal fjernes: ");
                         if (scanner.hasNextInt()) {
                             int ordreId = scanner.nextInt();
-                            scanner.nextLine(); // Ryd buffer
-
-                            ordreList.removeOrdre(ordreId); // <- Now we have a real local variable ordreId
-                            ordreList.completeOrdre(ordreId);
-                            ordreList.displayCompletedOrders();
+                            scanner.nextLine();
+                            orderList.completeOrder(ordreId);
+                            orderList.getCompletedOrder().displayCompletedOrders();
                         } else {
                             System.out.println("Ugyldigt input. Indtast venligst et gyldigt ordre-ID.");
-                            scanner.nextLine(); // Ryd buffer
+                            scanner.nextLine();
                         }
 
                         returnToMenu(scanner);
                         break;
                     case 4:
                         System.out.println("\n📦 Viser aktive bestillinger...");
-                        ordreList.displayOrdrer();
+                        orderList.displayOrders();
                         returnToMenu(scanner);
                         break;
                     case 5:
                         System.out.println("\n✅ Viser afsluttede bestillinger...");
-                        ordreList.getCompletedOrdre().displayCompletedOrders();
+                        orderList.getCompletedOrder().displayCompletedOrders();
                         returnToMenu(scanner);
                         break;
                     case 6:
@@ -79,7 +78,7 @@ public class Menu {
                         break;
                     case 7:
                         System.out.println("\n🔴 Afslutter programmet...");
-                        return; // Exit method
+                        return;
                     default:
                         System.out.println("\n⚠ Ugyldigt valg! Indtast et tal mellem 1 og 7.");
                 }
@@ -89,13 +88,14 @@ public class Menu {
         }
     }
 
+    //Method that returns to start of the menu
     private void returnToMenu (Scanner scanner) {
         while (true) {
             System.out.print("\n🔄 Tryk (1) for at gå tilbage til menuen: ");
             String input = scanner.nextLine().trim();
 
             if (input.equals("1")) {
-                return; // Go back to menu
+                return;
             } else {
                 System.out.println("\n⚠ Ugyldigt input. Tryk (1) for at vende tilbage til menuen.");
             }

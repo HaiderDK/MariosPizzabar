@@ -42,8 +42,8 @@ public class Pizza {
             this.price = price;
     }
 
-    // Shows the pizzaMenu
-    public void showPizzaMenu(){
+        // Shows the pizzaMenu
+        public void showPizzaMenu(){
         System.out.println(" ");
         for(int i = 0; i < pizzas.length; i++){
             System.out.println((i + 1) + ". " + pizzas[i]);
@@ -52,7 +52,7 @@ public class Pizza {
 
 
 
-    // Konstruktor tager ikke nogle argumenter, men istedet læser den vores inpput på scanneren og printer det ud
+        // Konstruktor uden argumenter. Læser inpput og printer det ud
         public Pizza(){}
 
         // Getter for beskrivelsen

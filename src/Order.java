@@ -5,15 +5,15 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Ordre {
+public class Order {
     private static final Random random = new Random();
     private  Map<Pizza, Integer> pizzaOrdre; // Holder styr på pizzaer og deres antal
     private LocalDateTime orderTime;
     private final int ordreId;  // Instansvariabel for ordreId
-    static OrdreList ordreList = new OrdreList();
+    static OrderList orderList = new OrderList();
 
     // Konstruktør
-    public Ordre() {
+    public Order() {
         this.ordreId = 1000 + random.nextInt(90000);  // Tildeler et unikt ordreID
         pizzaOrdre = new HashMap<>();  // Initialiser pizzaOrdre som en HashMap
         this.orderTime = LocalDateTime.now();  // Tildeler bestillingstidspunktet
@@ -64,7 +64,7 @@ public class Ordre {
 
 
     // Afslut ordre og print ordrebekræftelse
-    public void finalizeOrder(OrdreList ordreList, Scanner scanner) {
+    public void finalizeOrder(OrderList orderList, Scanner scanner) {
 
         // Registrer tid og forventet færdig tid
         LocalDateTime orderTime = LocalDateTime.now();
@@ -87,7 +87,7 @@ public class Ordre {
         System.out.println("Tak for din bestilling! 🍕");
 
         // Tilføj ordren til OrdreList
-        ordreList.addOrdre(this);  // Kald addOrdre med den aktuelle ordre (this)
+        orderList.addOrder(this);  // Kald addOrdre med den aktuelle ordre (this)
 
         }
 
@@ -101,8 +101,8 @@ public class Ordre {
 
 
         // Bestilling af pizza
-        public static Ordre createOrder(Scanner scanner) {
-            Ordre ordre = new Ordre();
+        public static Order createOrder(Scanner scanner) {
+            Order order = new Order();
             boolean ordering = true;
 
             while (ordering) {
@@ -115,7 +115,7 @@ public class Ordre {
                     if (scanner.hasNextInt()) {
                         int choice = scanner.nextInt();
                         scanner.nextLine(); // Ryd buffer efter nextInt()
-                        selectedPizza = Ordre.getPizza(choice);
+                        selectedPizza = Order.getPizza(choice);
 
                         if (selectedPizza == null) {  // Hvis choice ikke er en gyldig pizza
                             System.out.println("Ugyldigt valg. Prøv igen.");
@@ -142,7 +142,7 @@ public class Ordre {
                 }
 
                 // Tilføj pizza til ordren
-                ordre.addPizzaToOrder(selectedPizza, quantity);
+                order.addPizzaToOrder(selectedPizza, quantity);
 
                 // Spørg om brugeren vil bestille flere
                 String response = "";
@@ -158,9 +158,9 @@ public class Ordre {
                     ordering = false;  // Stop bestilling
                 }
             }
-            ordre.finalizeOrder(ordreList, scanner);
+            order.finalizeOrder(orderList, scanner);
 
-            return ordre; // Kalder finalizeOrder på den aktuelle ordre
+            return order; // Kalder finalizeOrder på den aktuelle ordre
         }
 
     }
