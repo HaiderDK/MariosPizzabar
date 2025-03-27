@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
     public class CompletedOrdre {
         private ArrayList<Ordre> completedOrders;
@@ -16,13 +15,12 @@ import java.util.Scanner;
         // Display completed orders
         public void displayCompletedOrders() {
             System.out.println("\nFærdige Ordrer:");
-            for (Ordre ordre : completedOrders) {
-                System.out.println(ordre);
+            if (completedOrders.isEmpty()) {
+                System.out.println("Ingen færdige ordrer.");
+            } else {
+                for (Ordre ordre : completedOrders) {
+                    System.out.println(ordre);
+                }
             }
         }
     }
-
-
-
-
-

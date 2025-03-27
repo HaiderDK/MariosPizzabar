@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,16 +6,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Ordre {
-    static Random random = new Random();
-    static Scanner scanner = new Scanner(System.in);
-    private static Map<Pizza, Integer> pizzaOrdre = new HashMap<>(); // Holder styr på pizzaer og deres antal
+    private static final Random random = new Random();
+    private  Map<Pizza, Integer> pizzaOrdre; // Holder styr på pizzaer og deres antal
     private LocalDateTime orderTime;
-    private static int ordreId;  // Instansvariabel for ordreId
+    private final int ordreId;  // Instansvariabel for ordreId
     static OrdreList ordreList = new OrdreList();
-    static boolean ordering = true;
 
     // Konstruktør
-    public Ordre(int ordreId, LocalTime orderTime) {
+    public Ordre() {
         this.ordreId = 1000 + random.nextInt(90000);  // Tildeler et unikt ordreID
         pizzaOrdre = new HashMap<>();  // Initialiser pizzaOrdre som en HashMap
         this.orderTime = LocalDateTime.now();  // Tildeler bestillingstidspunktet
@@ -46,20 +43,19 @@ public class Ordre {
 
 
     // Metode til at tilføje pizza til ordren
-    public static void addPizzaToOrder(Pizza pizza, int quantity) {
+    public void addPizzaToOrder(Pizza pizza, int quantity) {
         pizzaOrdre.put(pizza, pizzaOrdre.getOrDefault(pizza, 0) + quantity);
     }
 
 
 
     // Metode til at hente kundens info
-    public static String CustomersInfo() {
+    public static String CustomersInfo(Scanner scanner) {
         System.out.println("Navn: ");
         String name = scanner.nextLine();
 
         System.out.println("Telefon nummer:");
         String number = scanner.nextLine();
-        scanner.nextLine();
 
         return "\nName: " + name + "\nTelefon nummer: +45" + number;
     }
@@ -68,7 +64,7 @@ public class Ordre {
 
 
     // Afslut ordre og print ordrebekræftelse
-    public void finalizeOrder(OrdreList ordreList) {
+    public void finalizeOrder(OrdreList ordreList, Scanner scanner) {
 
         // Registrer tid og forventet færdig tid
         LocalDateTime orderTime = LocalDateTime.now();
@@ -78,7 +74,7 @@ public class Ordre {
 
         System.out.println("\nOrdrebekræftelse 🍕");
         System.out.println("Ordre ID: " + ordreId);
-        System.out.println("Kundeoplysninger: " + CustomersInfo());
+        System.out.println("Kundeoplysninger: " + CustomersInfo(scanner));
         System.out.println("Bestillingstidspunkt: " + orderTime.format(formatter));
         System.out.println("Forventet færdig: " + readyTime.format(formatter));
         System.out.println("Bestilling:");
@@ -105,14 +101,9 @@ public class Ordre {
 
 
         // Bestilling af pizza
-        public static Ordre bestilling() {
+        public static Ordre createOrder(Scanner scanner) {
+            Ordre ordre = new Ordre();
             boolean ordering = true;
-
-            // Hent kun tid (hh:mm:ss format)
-            LocalTime orderTime = LocalTime.now();
-
-            Ordre ordre = new Ordre(ordreId, orderTime);  // Opret ny ordre med tid
-
 
             while (ordering) {
                 Pizza selectedPizza = null;
@@ -151,7 +142,7 @@ public class Ordre {
                 }
 
                 // Tilføj pizza til ordren
-                Ordre.addPizzaToOrder(selectedPizza, quantity);
+                ordre.addPizzaToOrder(selectedPizza, quantity);
 
                 // Spørg om brugeren vil bestille flere
                 String response = "";
@@ -167,30 +158,9 @@ public class Ordre {
                     ordering = false;  // Stop bestilling
                 }
             }
-            ordre.finalizeOrder(ordreList);
-
-            // Mulighed for at gå tilbage til menuen
-            String returnToMenu = "";
-            while (!returnToMenu.equalsIgnoreCase("ja") && !returnToMenu.equalsIgnoreCase("nej")) {
-                System.out.print("Vil du tilbage til menuen? (Ja/Nej): ");
-                returnToMenu = scanner.nextLine().trim();
-                if (!returnToMenu.equalsIgnoreCase("ja") && !returnToMenu.equalsIgnoreCase("nej")) {
-                    System.out.println("Ugyldigt svar! Skriv 'Ja' eller 'Nej'.");
-                }
-            }
-
-            if (returnToMenu.equalsIgnoreCase("ja")) {
-                // Kald menuen, afhængig af hvordan du har struktureret din menu.
-                Menu menu = new Menu();
-                menu.pizzaMenu(scanner);  // Går tilbage til menuen
-            }
+            ordre.finalizeOrder(ordreList, scanner);
 
             return ordre; // Kalder finalizeOrder på den aktuelle ordre
         }
 
     }
-
-
-
-
-
