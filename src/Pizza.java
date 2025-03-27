@@ -3,11 +3,11 @@ public class Pizza {
         private String description;
 
         public static final Pizza[] pizzas = {
-                new Pizza(" Vesuvio: tomatsauce, ost, skinke og oregano", 65),
-                new Pizza(" Amerkaner: tomatsauce, ost, oksefars og oregano", 65),
-                new Pizza(" Cacciatore: tomatsauce, ost, pepperoni og oregano", 85),
-                new Pizza(" Carbona: tomatsauce, ost, kødsauce og oregano", 95),
-                new Pizza(" Dennis: tomatsauce, ost, skinke, pepperoni, cocktailpølser og oregano",65),
+                new Pizza(" Deniz: tomatsauce, ost, Kylling og løg", 65),
+                new Pizza(" Haider: tomatsauce, ost, Shawarma og løg", 65),
+                new Pizza(" Zak: tomatsauce, ost, kebab og løg", 85),
+                new Pizza(" Erkam: tomatsauce, ost, kødsauce og bearnaisesovs", 95),
+                new Pizza(" Mo: tomatsauce, ost, kødstrimler, løg, champignon og oliven",65),
                 new Pizza(" Bertil: tomatsauce, ost, bacon og oregano", 75),
                 new Pizza(" Silvia: tomatsauce, ost pepperoni, rød peber, løg, oliven og oregano", 85),
                 new Pizza(" Victoria: tomatsauce, ost skinke, ananas, champignon, løg og oregano", 85),
