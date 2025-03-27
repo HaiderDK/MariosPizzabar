@@ -6,6 +6,6 @@ public class PizzaSystem {
         Scanner scanner = new Scanner(System.in);
         OrderList orderList = new OrderList();
         Menu menu = new Menu(orderList);
-        menu.pizzaMenu(scanner);
+        menu.pizzaMenu(scanner); //calls the menu
     }
 }

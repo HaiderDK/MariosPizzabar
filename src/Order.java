@@ -28,7 +28,9 @@ public class Order {
         return orderTime;  // Returner bestillingstidspunktet
     }
 
-
+    public Map<Pizza, Integer> getPizzaOrdre() {
+        return pizzaOrdre;
+    }
 
     // Metode til at få pizza baseret på valg
     public static Pizza getPizza(int choice) {

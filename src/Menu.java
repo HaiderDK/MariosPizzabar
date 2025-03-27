@@ -74,6 +74,7 @@ public class Menu {
                         break;
                     case 6:
                         System.out.println("\n📊 Genererer rapport og statistik...");
+                        Statistics.displayStatistics(orderList.getCompletedOrder());
                         returnToMenu(scanner);
                         break;
                     case 7:

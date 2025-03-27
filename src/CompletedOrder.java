@@ -3,6 +3,10 @@ import java.util.ArrayList;
     public class CompletedOrder {
         private ArrayList<Order> completedOrders;
 
+        public ArrayList<Order> getCompletedOrders() {
+            return completedOrders;
+        }
+
         public CompletedOrder() {
             this.completedOrders = new ArrayList<>();
         }

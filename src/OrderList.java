@@ -23,7 +23,6 @@ import java.util.Comparator;
             System.out.println("Ny ordre tilføjet: " + order);
         }
 
-
         // Flytter en færdig ordre til CompletedOrdre
         public void completeOrder(int ordreId) {
             Order found = null;
@@ -42,13 +41,10 @@ import java.util.Comparator;
             }
         }
 
-
         // Ordre sorteres efter bestillingstid
         public void sortOrdersByTime() {
             Collections.sort(activeOrders, Comparator.comparing(Order::getOrderTime));
         }
-
-
 
         // Viser alle aktive ordrer
         public void displayOrders() {

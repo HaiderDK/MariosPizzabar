@@ -35,8 +35,6 @@ public class Pizza {
                 new Pizza(" Lanne: tomatsauce, ost, skinke, champignon og oregano", 65),
         };
 
-
-
         public Pizza(String description, int price) {
             this.description = description;
             this.price = price;
@@ -50,16 +48,17 @@ public class Pizza {
         }
     }
 
-
-
         // Konstruktor uden argumenter. Læser inpput og printer det ud
         public Pizza(){}
 
         // Getter for beskrivelsen
         public String getDescription() {
             return description + " (" + price + " kr.)";
-
         }
+
+        public int getPrice() {
+            return price;
+    }
 
         // toString-metoden til at returnere pizzaens beskrivelse
         @Override
